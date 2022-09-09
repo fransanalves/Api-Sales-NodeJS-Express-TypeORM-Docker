@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
+import { errors } from 'celebrate';
 import { routes } from './routes';
 import { MessageError } from '@shared/errors/MessageError';
 import '@shared/typeorm/data-source';
@@ -14,6 +15,8 @@ DataSourceConnection.initialize().then(() => {
   server.use(express.json());
 
   server.use(routes);
+
+  server.use(errors());
 
   server.use(
     (error: Error, req: Request, res: Response, next: NextFunction) => {
