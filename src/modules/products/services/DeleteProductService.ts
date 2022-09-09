@@ -1,4 +1,4 @@
-import MessageError from '@shared/errors/MessageError';
+import { MessageError } from '@shared/errors/MessageError';
 import { ProductsRepository } from '../typeorm/repositories/ProductsRepository';
 
 interface IProduct {

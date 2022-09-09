@@ -1,4 +1,4 @@
-import MessageError from '@shared/errors/MessageError';
+import { MessageError } from '@shared/errors/MessageError';
 import { Product } from '../typeorm/entities/Product';
 import { ProductsRepository } from '../typeorm/repositories/ProductsRepository';
 
@@ -13,6 +13,12 @@ export class CreateProductService {
     const productExists = await productRepository.findByName(name);
     if (productExists) {
       throw new MessageError('There is already one product with this name');
+    }
+    if (price <= 0) {
+      throw new MessageError('This price is invalid.');
+    }
+    if (quantity <= 0) {
+      throw new MessageError('This quantity is invalid.');
     }
     const product = productRepository.create({
       name,
