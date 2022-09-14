@@ -3,8 +3,8 @@ import { UsersRepository } from '../typeorm/repositories/UsersRepository';
 
 export class ListUserService {
   async execute(): Promise<User[]> {
-    const repository = UsersRepository;
-    const users = await repository.find();
+    const userRepository = UsersRepository;
+    const users = await userRepository.find();
 
     return users;
   }
