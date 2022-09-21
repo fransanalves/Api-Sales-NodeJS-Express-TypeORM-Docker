@@ -7,13 +7,14 @@ import { routes } from './routes';
 import { MessageError } from '@shared/errors/MessageError';
 import '@shared/typeorm/data-source';
 import { DataSourceConnection } from '@shared/typeorm/data-source';
+import uploadConfig from '@config/upload';
 
 DataSourceConnection.initialize().then(() => {
   const server = express();
 
   server.use(cors());
   server.use(express.json());
-
+  server.use('/files', express.static(uploadConfig.directory));
   server.use(routes);
 
   server.use(errors());
