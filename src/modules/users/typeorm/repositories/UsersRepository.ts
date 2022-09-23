@@ -3,26 +3,20 @@ import { User } from '../entities/User';
 
 export const UsersRepository = DataSourceConnection.getRepository(User).extend({
   async findByName(name: string): Promise<User | null> {
-    const userName = await this.createQueryBuilder('user')
-      .where('user.name = :name', { name })
-      .getOne();
+    const user = await this.findOneBy({ name });
 
-    return userName;
+    return user;
   },
 
   async findById(id: string): Promise<User | null> {
-    const userId = await this.createQueryBuilder('user')
-      .where('user.id = :id', { id })
-      .getOne();
+    const user = await this.findOneBy({ id });
 
-    return userId;
+    return user;
   },
 
   async findByEmail(email: string): Promise<User | null> {
-    const userEmail = await this.createQueryBuilder('user')
-      .where('user.email = :email', { email })
-      .getOne();
+    const user = await this.findOneBy({ email });
 
-    return userEmail;
+    return user;
   },
 });
