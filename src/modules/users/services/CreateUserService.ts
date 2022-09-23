@@ -12,18 +12,18 @@ interface IUser {
 export class CreateUserService {
   async execute({ name, email, password }: IUser): Promise<User> {
     const userRepository = UsersRepository;
-    const user = await userRepository.findByEmail(email);
-    if (!user) {
+    const userEmailExists = await userRepository.findByEmail(email);
+    if (userEmailExists) {
       throw new MessageError('Email already registered.');
     }
     const encryptedPassword = await hash(password, 8);
-    const userObj = userRepository.create({
+    const user = userRepository.create({
       name,
       email,
       password: encryptedPassword,
     });
 
-    await userRepository.save(userObj);
+    await userRepository.save(user);
 
     return user;
   }
