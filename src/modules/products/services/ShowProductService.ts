@@ -9,7 +9,7 @@ interface IProduct {
 export class ShowProductService {
   public async execute({ id }: IProduct): Promise<Product> {
     const productRepository = ProductsRepository;
-    const productId = await productRepository.findOne({ where: { id } });
+    const productId = await productRepository.findOneBy({ id });
     if (!productId) {
       throw new MessageError('Product not found.');
     }

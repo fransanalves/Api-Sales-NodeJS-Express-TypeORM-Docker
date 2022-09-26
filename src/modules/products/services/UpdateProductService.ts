@@ -17,7 +17,7 @@ export class UpdateProductService {
     quantity,
   }: IProduct): Promise<Product> {
     const productRepository = ProductsRepository;
-    const product = await productRepository.findOne({ where: { id } });
+    const product = await productRepository.findOneBy({ id });
     const productNameExists = await productRepository.findByName(name);
     if (!product) {
       throw new MessageError('Product not found.');
