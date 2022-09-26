@@ -30,3 +30,12 @@ usersRouter.patch(
   upload.single('avatar'),
   usersAvatarController.update,
 );
+usersRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  usersController.delete,
+);
