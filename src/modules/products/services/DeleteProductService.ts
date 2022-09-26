@@ -8,7 +8,7 @@ interface IProduct {
 export class DeleteProductService {
   public async execute({ id }: IProduct): Promise<void> {
     const productRepository = ProductsRepository;
-    const productId = await productRepository.findOne({ where: { id } });
+    const productId = await productRepository.findOneBy({ id });
     if (!productId) {
       throw new MessageError('Product not found.');
     }
