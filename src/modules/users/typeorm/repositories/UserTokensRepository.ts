@@ -10,7 +10,7 @@ export const UserTokensRepository = DataSourceConnection.getRepository(
     return userToken;
   },
 
-  async generate(user_id: string): Promise<UserToken | null> {
+  async generate(user_id: string): Promise<UserToken> {
     const userToken = await this.create({ user_id });
 
     await this.save(userToken);
